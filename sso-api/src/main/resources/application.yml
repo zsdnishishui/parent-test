@@ -1,7 +1,10 @@
 server:
-  port: 8082
+  port: 8084
 #数据源连接信息
 spring:
+  application:
+    name: ssoProvider
+
   datasource:
     username: root
     password: 123
@@ -49,3 +52,12 @@ mybatis-plus:
     map-underscore-to-camel-case: true
     cache-enabled: false
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+eureka:
+  client: #将客户端注册到 eureka 服务列表内
+    service-url:
+      defaultZone: http://localhost:7001/eureka  #这个地址是 7001注册中心在 application.yml 中暴露出来额注册地址 （单机版）
+  instance:
+    instance-id: spring-cloud-provider-8004 #自定义服务名称信息
+    prefer-ip-address: true  #显示访问路径的 ip 地址

@@ -1,6 +1,8 @@
 server:
   port: 8081
 spring:
+  application:
+      name: pcClient
   session:
     #session存储方式
     store-type: redis
@@ -26,3 +28,10 @@ spring:
     password: 123
     url: jdbc:mysql://192.168.1.11:3306/test
     driver-class-name: com.mysql.cj.jdbc.Driver
+############################################# Spring Cloud Ribbon 负载均衡配置##########################
+eureka:
+  client:
+    register-with-eureka: false #本微服务为服务消费者，不需要将自己注册到服务注册中心
+    fetch-registry: true  #本微服务为服务消费者，需要到服务注册中心搜索服务
+    service-url:
+      defaultZone: http://localhost:7001/eureka #服务注册单机版

@@ -23,7 +23,7 @@ public class HelloController {
     private SysPermissionService sysPermissionService;
     @GetMapping("/hello")
     public String hello() {
-        System.out.println("hello");
+        System.out.println("hello"+Thread.currentThread().getName());
         return "hello";
     }
     @GetMapping("/getUser")
