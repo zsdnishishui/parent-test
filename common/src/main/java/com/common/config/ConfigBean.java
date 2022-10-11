@@ -1,9 +1,10 @@
-package com.pc.config;
+package com.common.config;
 
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
+
 // 配置类注解
 @Configuration
 public class ConfigBean {

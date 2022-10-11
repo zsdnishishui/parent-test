@@ -16,7 +16,7 @@ import java.io.IOException;
  * @Description: 权限拦截器
  * @Date Create in 2019/9/4 16:25
  */
-@Service
+//@Service
 public class CustomizeAbstractSecurityInterceptor extends AbstractSecurityInterceptor implements Filter {
 
     @Autowired

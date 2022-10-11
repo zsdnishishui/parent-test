@@ -16,7 +16,7 @@ import java.util.Iterator;
  * @Description: 访问决策管理器
  * @Date Create in 2019/9/3 20:38
  */
-@Component
+//@Component
 public class CustomizeAccessDecisionManager implements AccessDecisionManager {
     @Override
     public void decide(Authentication authentication, Object o, Collection<ConfigAttribute> collection) throws AccessDeniedException, InsufficientAuthenticationException {
