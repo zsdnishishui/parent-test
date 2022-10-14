@@ -34,11 +34,11 @@ public class OauthResourceConfig extends ResourceServerConfigurerAdapter {
 //    }
 
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-        resources.resourceId("product_api");//指定保存token的方式
+        resources.resourceId("product_api");
     }
 
     public void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/base/**").hasRole("admin").anyRequest().authenticated()
+        http.authorizeRequests().antMatchers("/admin/**").hasRole("admin").anyRequest().authenticated()
                 ;
     }
 }
