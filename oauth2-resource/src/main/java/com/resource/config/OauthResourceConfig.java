@@ -10,6 +10,9 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
+import org.springframework.security.oauth2.provider.token.TokenStore;
+
+import javax.annotation.Resource;
 
 @Configuration
 @EnableResourceServer
@@ -30,19 +33,28 @@ public class OauthResourceConfig extends ResourceServerConfigurerAdapter {
 //    public TokenStore jdbcTokenStore() {
 //        return new JdbcTokenStore(dataSource);
 //    }
-@Primary
-@Bean
-public RemoteTokenServices remoteTokenServices(){
-    final RemoteTokenServices remoteTokenServices = new RemoteTokenServices();
-//      设置/oauth/check_token端口
-    remoteTokenServices.setCheckTokenEndpointUrl("http://localhost:8083/oauth/check_token");
-//      设置客户端信息
-    remoteTokenServices.setClientId("client");
-    remoteTokenServices.setClientSecret("secret");
-    return remoteTokenServices;
-}
+@Resource
+TokenStore tokenStore;
 
+//    @Primary
+//@Bean
+//public RemoteTokenServices remoteTokenServices(){
+//    final RemoteTokenServices remoteTokenServices = new RemoteTokenServices();
+////      设置/oauth/check_token端口
+//    remoteTokenServices.setCheckTokenEndpointUrl("http://localhost:8083/oauth/check_token");
+////      设置客户端信息
+//    remoteTokenServices.setClientId("client");
+//    remoteTokenServices.setClientSecret("secret");
+//    return remoteTokenServices;
+//}
 
+    /**
+     * 自动调用 JwtAccessTokenConverter 将 jwt 解析出来，jwt 里边就包含了用户的基本信息，所以就不用上面一样远程校验 access_token 了。
+     */
+    @Override
+    public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+        resources.tokenStore(this.tokenStore);
+    }
 //    public void configure(HttpSecurity http) throws Exception {
 //        http.authorizeRequests().antMatchers("/admin/**").hasRole("admin").anyRequest().authenticated()
 //                ;
