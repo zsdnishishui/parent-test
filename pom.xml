@@ -27,6 +27,8 @@
     <module>sso-api</module>
     <module>pc-api</module>
     <module>eureka</module>
+      <module>oauth2</module>
+      <module>oauth2-resource</module>
   </modules>
   <dependencyManagement>
     <dependencies>
