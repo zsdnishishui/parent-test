@@ -48,24 +48,4 @@ public class HelloController {
         return user;
     }
 
-    @GetMapping("/index")
-    public ResponseEntity<String> hello(String code) {
-        if (code != null) {
-            MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
-            map.add("code", code);
-            map.add("client_id", "javaboy");
-            map.add("client_secret", "123");
-            map.add("redirect_uri", "http://localhost:8082/index.html");
-            map.add("grant_type", "authorization_code");
-            Map<String,String> resp = restTemplate.postForObject("http://localhost:8082/oauth/token", map, Map.class);
-            String access_token = resp.get("access_token");
-            System.out.println(access_token);
-            HttpHeaders headers = new HttpHeaders();
-            headers.add("Authorization", "Bearer " + access_token);
-            HttpEntity<Object> httpEntity = new HttpEntity<>(headers);
-            ResponseEntity<String> entity = restTemplate.exchange("http://localhost:8082/admin/hello", HttpMethod.GET, httpEntity, String.class);
-            return entity;
-        }
-        return null;
-    }
 }

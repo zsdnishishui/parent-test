@@ -38,7 +38,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .secret(passwordEncoder.encode("secret"))
                 .authorizedGrantTypes("authorization_code")
                 .scopes("app")
-                .redirectUris("http://www.baidu.com");
+                .autoApprove(true)
+                .redirectUris("http://www.baidu.com","http://localhost:8081/login/loginCode");
 
     }
     @Override
