@@ -43,13 +43,14 @@ public class LoginController {
             map.add("client_id", clientId);
             map.add("client_secret", clientSecret);
             map.add("grant_type", "authorization_code");
+            map.add("redirect_uri", redirectUrl);
             Map<String,String> resp = restTemplate.postForObject("http://localhost:8083/oauth/token", map, Map.class);
             String access_token = resp.get("access_token");
             System.out.println(access_token);
             HttpHeaders headers = new HttpHeaders();
             headers.add("Authorization", "Bearer " + access_token);
             HttpEntity<Object> httpEntity = new HttpEntity<>(headers);
-            ResponseEntity<String> entity = restTemplate.exchange("http://localhost:8084/base/world", HttpMethod.GET, httpEntity, String.class);
+            ResponseEntity<String> entity = restTemplate.exchange("http://localhost:8083/base/world", HttpMethod.GET, httpEntity, String.class);
             return entity;
         }
         return null;
